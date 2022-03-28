@@ -1,176 +1,23 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <!-- SEO TAGS -->
+    <meta property="og:title" content="Relógio Digital">
+    <meta property="og:description" content="Esta página é uma aplicação Web de um relógio digital criada por André Moura Santos, saiba mais no repositório do GitHub.">
+    <meta name="description" content="Esta página é uma aplicação Web de um relógio digital criada por André Moura Santos, saiba mais no repositório do GitHub.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="app.andremourasantos.com">
+    <meta name="image" property="og:image" content="https://andremourasantos.com/imagens/miniaturas/github.jpg">
+
+    <!-- OUTRAS TAGS -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="André Moura Santos">
+    <meta name="application-name" content="Relógio">
+
+    <link rel="stylesheet" href="index.css">
     <title>Relógio</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-        }
-
-        :root {
-            --corFundo: antiquewhite;
-            --cor1: #fff;
-            --cor2: aliceblue;
-            --cor3: cadetblue;
-            --texto: #000;
-            --textoBotão: #fff;
-            --sombra: 0 0 10px 1px #00000015;
-        }
-
-        .modo-escuro {
-            --corFundo: #1C0C5B;
-            --cor1: #C996CC;
-            --cor2: #916BBF;
-            --cor3: #3D2C8D;
-            --texto: #1C0C5B;
-            --textoBotão: #C996CC;
-            --sombra: 0 0 5px 0px var(--cor1);
-        }
-        
-        html, body {
-            height: 100%;
-            width: 100%;
-        }
-
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 1vh;
-            background-color: var(--corFundo);
-        }
-
-        body > * {
-            display: none;
-            animation: conteúdoAparecer 350ms linear;
-        }
-
-            @keyframes conteúdoAparecer {
-                0% {transform: scale(0.9); opacity: 0;}
-                100% {transform: scale(1); opacity: 1;}
-            }
-
-        main {
-            max-width: 1000px;
-            background-color: var(--cor1);
-            padding: 5vh 5vw;
-            border-radius: 20px;
-            box-shadow: var(--sombra);
-        }
-
-        h1, h2, p {
-            color: var(--texto);
-        }
-
-        section.hora {
-            text-align: right;
-        }
-
-        section.hora h1 {
-            font-size: 2em;
-        }
-
-        p#hora {
-            font-size: 4em;
-            font-weight: bold;
-        }
-
-        section.info {
-            background-color: var(--cor2);
-            width: calc(100%);
-            padding: 2.5vh 5vw;
-            position: relative;
-            left: -5vw;
-            bottom: -5vh;
-            text-align: center;
-            border-radius: 0px 0px 20px 20px;
-        }
-
-        /*POPUPS DE APRESENTAÇÃO*/
-        #popup {
-            background-color: var(--cor1);
-            padding: 5vh 5vw;
-            border-radius: 20px;
-            width: 50vw;
-            height: fit-content;
-            max-height: 80vh;
-            overflow-y: scroll;
-            text-align: justify;
-            box-shadow: var(--sombra);
-            animation: popupAparecer 350ms linear;
-        }
-
-        #popup p {
-            margin: 2.5vh auto 0px auto;
-        }
-
-        #popup p:first-child {
-            margin: 0px auto 0px auto;
-        }
-
-            @keyframes popupAparecer {
-                0% {transform: scale(0.9); opacity: 0;}
-                100% {transform: scale(1); opacity: 1;}
-            }
-
-            @keyframes popupSumir {
-                0% {transform: scale(1); opacity: 1;}
-                100% {transform: scale(0.9); opacity: 0;}
-            }
-
-        #popup button, #seletorModoCor {
-            margin: 2.5vh auto 0px auto;
-            padding: 2vh 5vw;
-            border: none;
-            border-radius: 20px;
-            background-color: var(--cor3);
-            color: var(--textoBotão);
-            font-weight: bold;
-            transition-duration: 250ms;
-            cursor: pointer;
-            display: block;
-        }
-
-        #popup button:active, #seletorModoCor:active {
-            transform: scale(0.9);
-        }
-
-        #seletorModoCor {
-            padding: 10px 20px;
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-        }
-
-        @media screen and (max-width: 425px) {
-            section.hora h1 {
-            font-size: 1.5em;
-            }
-
-            p#hora {
-                font-size: 3em;
-            }
-        }
-        /*
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --corFundo: #1C0C5B;
-                --cor1: #C996CC;
-                --cor2: #916BBF;
-                --cor3: #3D2C8D;
-                --texto: #1C0C5B;
-                --textoBotão: #C996CC;
-                --sombra: 0 0 5px 0px var(--cor1);
-            }
-        }
-        */
-    </style>
 </head>
 <body>
     <section style="display: block;" id="popup">
@@ -191,66 +38,6 @@
         </section>
     </main>
     <button id="seletorModoCor" onclick="alterarModoCor()">Modo</button>
- 
-<script>
-    console.log('Iniciando...')
-    const horatxt = document.getElementById('hora')
-    const horainfotxt = document.getElementById('horaInfo')
-    console.log(`Constante horatxt definida para ${horatxt}`)
-    console.log(`Constante horainfotxt definida para ${horainfotxt}`)
-    let data = new Date()
-    console.log(`Data definida para: ${data}`)
-    let hora = data.getHours(Number)
-    let minutos = data.getMinutes(Number)
-    let segundos = data.getSeconds(Number)
-    console.log('Contagem de ciclos definida para zero.')
-    let ciclos = 0
-
-    function mostrarHoras() {
-        setTimeout(() => {
-            data = new Date()
-            hora = data.getHours(Number)
-            minutos = data.getMinutes(Number)
-            segundos = data.getSeconds(Number)
-            //console.log(`Dara atualizada para: ${data}`)
-
-            if (segundos < 10 && minutos < 10) {
-                horatxt.innerHTML = `${hora}:0${minutos}:0${segundos}`
-            } else if (segundos < 10) {
-                horatxt.innerHTML = `${hora}:${minutos}:0${segundos}`
-            } else if (minutos < 10) {
-                horatxt.innerHTML = `${hora}:0${minutos}:${segundos}`
-            } else {
-                horatxt.innerHTML = `${hora}:${minutos}:${segundos}`
-            }
-            
-            ciclos++
-            horainfotxt.innerHTML = `<p>Número de ciclos: ${ciclos}</p>`
-            mostrarHoras()
-        }, 1000);
-    }
-
-    mostrarHoras()
-    
-    function mostrarSite() {
-        setTimeout(() => {
-            document.getElementById('popup').style.animation = 'popupSumir 350ms linear'
-
-            setTimeout(() => {
-                document.getElementById('popup').style.display = 'none'
-                document.querySelector('main').style.display = 'block'
-            }, 350)
-        }, 250)
-    }
-
-    function alterarModoCor() {
-        document.querySelector('body').classList.toggle('modo-escuro')
-    }
-
-    if(window.matchMedia('(prefers-color-scheme: dark)').matches){
-        document.querySelector('body').classList += 'modo-escuro'
-    } else {document.querySelector('body').classList -= 'modo-escuro'}
-
-</script>
+    <script src="index.js"></script>
 </body>
 </html>
